@@ -47,15 +47,6 @@ Run the installer:
 ./install.sh
 ```
 
-If installing to a system directory such as `/usr/local/bin`
-
-You may be prompted for your password.
-If required, run:
-
-```bash
-sudo ./install.sh
-```
-
 ### What the installer does
 
 The `install.sh` script:
