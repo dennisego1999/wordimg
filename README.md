@@ -86,6 +86,7 @@ If the install directory is not in your PATH, add the following line to your `~/
 
 ```bash
 export PATH="$HOME/.local/bin:$PATH"
+```
 
 ---
 
