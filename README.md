@@ -1,19 +1,20 @@
 # wordimg
 
-A simple CLI tool to extract and resize images from Microsoft Word (.docx) files.
+A lightweight CLI tool to extract and resize images from Microsoft Word (.docx) files.
 
-`wordimg` extracts all embedded images from a Word document and resizes them to a specified dimension using ImageMagick.
+`wordimg` extracts embedded images from a Word document and resizes them using ImageMagick with support for `contain` and `cover` fit modes.
 
 ---
 
 ## ✨ Features
 
-- Extracts all images from `.docx` files
-- Resize using `contain` or `cover` fit modes
-- Supports transparent backgrounds (`--background none`)
+- Extract all images from `.docx` files
+- Resize to any square or custom dimension
+- `contain` and `cover` fit modes (like CSS `object-fit`)
+- Optional background color (supports transparency)
 - Optional preservation of original extracted images
-- Clean CLI output with colored status messages
-- Fails safely with clear error messages
+- Clean CLI output with proper error handling
+- Stops immediately on failure
 
 ---
 
@@ -40,19 +41,42 @@ git clone git@github.com:dennisego1999/wordimg.git
 cd wordimg
 ```
 
-Make the script executable:
+Run the installer:
 
 ```bash
-chmod +x wordimg
+./install.sh
 ```
 
-(Optional) Move it to your bin directory:
+### What the installer does
+
+The `install.sh` script:
+
+1. Detects a suitable install location:
+   - `/usr/local/bin` (if writable)
+   - Otherwise `~/.local/bin`
+2. Copies the executable from `bin/wordimg`
+3. Makes it executable
+4. Checks whether the install directory is in your `PATH`
+5. If not, it prints clear instructions on how to add it
+
+The installer **does not modify your shell configuration automatically**.  
+Instead, it safely informs you if you need to add something like:
 
 ```bash
-mv wordimg ~/bin/
+export PATH="$HOME/.local/bin:$PATH"
 ```
 
-Make sure `~/bin` is in your PATH.
+to your `~/.zshrc` or `~/.bashrc`.
+
+This follows standard Unix CLI conventions.
+
+---
+
+After installation, you can verify:
+
+```bash
+wordimg --help
+```
 
 ---
 
@@ -78,18 +102,24 @@ wordimg --file FILE.docx --output OUTPUT_DIR [options]
 
 ## 📐 Fit Modes
 
-### `contain` (default)
+### contain (default)
+
 Preserves full image content. Pads with background color if necessary.
 
-Equivalent to CSS:
+Equivalent to:
+
 ```css
 object-fit: contain;
 ```
 
-### `cover`
-Fills the entire target size. Crops overflow if needed.
+---
 
-Equivalent to CSS:
+### cover
+
+Fills the entire target size. Crops overflow if necessary.
+
+Equivalent to:
+
 ```css
 object-fit: cover;
 ```
@@ -98,7 +128,7 @@ object-fit: cover;
 
 ## 🧪 Example
 
-Resize all images to 1000x1000 while keeping transparency and originals:
+Resize images to 1000x1000, preserve transparency, and keep originals:
 
 ```bash
 wordimg \
@@ -110,7 +140,7 @@ wordimg \
   --keep
 ```
 
-Result:
+Output:
 
 ```
 processed/
@@ -125,8 +155,21 @@ processed/
 
 ## 🛑 Error Handling
 
-If extraction or resizing fails, the script:
+If extraction or resizing fails:
 
-- Stops immediately
-- Prints a clear red error message
-- Does not continue to the next step
+- The script stops immediately
+- A clear red error message is displayed
+- No further steps are executed
+
+---
+
+## 📄 License
+
+MIT License
+
+---
+
+## 👤 Author
+
+Dennis Ego  
+GitHub: https://github.com/dennisego1999
