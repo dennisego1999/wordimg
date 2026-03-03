@@ -81,15 +81,11 @@ The `install.sh` script:
 
 > **Note:** After installation, the cloned repository is no longer needed. You can safely delete the folder — the `wordimg` command will continue to work because the executable has been copied to a directory in your PATH.
 
-The installer **does not automatically modify your shell configuration**, following standard Unix CLI conventions.
+The installer **does not automatically modify your shell configuration**, following standard Unix CLI conventions.  
+If the install directory is not in your PATH, add the following line to your `~/.zshrc` or `~/.bashrc`:
 
 ```bash
 export PATH="$HOME/.local/bin:$PATH"
-```
-
-to your `~/.zshrc` or `~/.bashrc`.
-
-This follows standard Unix CLI conventions.
 
 ---
 
