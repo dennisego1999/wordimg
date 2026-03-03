@@ -22,7 +22,7 @@ A lightweight CLI tool to extract and resize images from Microsoft Word (.docx) 
 
 - macOS or Linux
 - `unzip`
-- ImageMagick (`magick` command)
+- `magick`
 
 Install ImageMagick on macOS:
 ```bash
