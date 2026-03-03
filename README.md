@@ -41,26 +41,45 @@ git clone git@github.com:dennisego1999/wordimg.git
 cd wordimg
 ```
 
+Make the installer executable:
+
+```bash
+chmod +x install.sh
+```
+
 Run the installer:
 
 ```bash
 ./install.sh
 ```
 
+If installing to a system directory such as:
+
+- /usr/local/bin (Intel macOS)
+- /opt/homebrew/bin (Apple Silicon macOS)
+
+You may be prompted for your password.
+If required, run:
+
+```bash
+sudo ./install.sh
+```
+
 ### What the installer does
 
 The `install.sh` script:
 
-1. Detects a suitable install location:
-   - `/usr/local/bin` (if writable)
-   - Otherwise `~/.local/bin`
-2. Copies the executable from `bin/wordimg`
-3. Makes it executable
-4. Checks whether the install directory is in your `PATH`
-5. If not, it prints clear instructions on how to add it
+1. Locates the executable in `bin/`
+2. Detects a suitable install location:
+   - `/usr/local/bin`
+   - `/opt/homebrew/bin`
+   - or `~/.local/bin`
+3. Copies the executable to the selected directory
+4. Ensures it is executable
+5. Checks whether the install directory is in your `PATH`
+6. Prints instructions if you need to update your `PATH`
 
-The installer **does not modify your shell configuration automatically**.  
-Instead, it safely informs you if you need to add something like:
+The installer **does not automatically modify your shell configuration**, following standard Unix CLI conventions.
 
 ```bash
 export PATH="$HOME/.local/bin:$PATH"

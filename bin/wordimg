@@ -6,6 +6,17 @@
 
 set -e
 
+# -------- Dependency Checks --------
+require_command() {
+  if ! command -v "$1" >/dev/null 2>&1; then
+    echo -e "${RED}✗ $1 is not installed.${RESET}"
+    exit 1
+  fi
+}
+
+require_command magick
+require_command unzip
+
 # -------- Defaults --------
 SIZE=1024
 BG="white"
