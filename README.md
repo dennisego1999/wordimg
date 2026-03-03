@@ -79,6 +79,8 @@ The `install.sh` script:
 5. Checks whether the install directory is in your `PATH`
 6. Prints instructions if you need to update your `PATH`
 
+> **Note:** After installation, the cloned repository is no longer needed. You can safely delete the folder — the `wordimg` command will continue to work because the executable has been copied to a directory in your PATH.
+
 The installer **does not automatically modify your shell configuration**, following standard Unix CLI conventions.
 
 ```bash
