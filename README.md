@@ -110,7 +110,7 @@ wordimg --file FILE.docx --output OUTPUT_DIR [options]
 |------|-------------|
 | `--file` | Source `.docx` file |
 | `--output` | Output directory |
-| `--size` | Target dimension in pixels (default: 1024) |
+| `--size` | Target dimension in pixels. Can be a single number for square (e.g., 1000) or WxH for custom size (e.g., 1000x500) |
 | `--background` | Background color (default: white, use `none` for transparency) |
 | `--fit` | Resize mode: `contain` (default) or `cover` |
 | `--keep` | Save extracted originals in `_originals` subfolder |
