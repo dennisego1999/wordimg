@@ -91,7 +91,7 @@ wordimg --file FILE.docx --output OUTPUT_DIR [options]
 
 ---
 
-## 📐 Fit Modes
+## Fit Modes
 
 ### contain (default)
 
