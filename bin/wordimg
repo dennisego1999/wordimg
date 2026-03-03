@@ -27,7 +27,7 @@ require_command magick
 require_command unzip
 
 # -------- Defaults --------
-SIZE=1024
+SIZE="1024"
 BG="white"
 FIT="contain"
 KEEP=false
@@ -35,12 +35,12 @@ KEEP=false
 # -------- Usage --------
 usage() {
   echo -e "${BLUE}Usage:${RESET}"
-  echo "  wordimg --file FILE --output DIR [--size SIZE] [--background COLOR] [--fit contain|cover] [--keep]"
+  echo "  wordimg --file FILE --output DIR [--size SIZE|WxH] [--background COLOR] [--fit contain|cover] [--keep]"
   echo ""
   echo -e "${BLUE}Options:${RESET}"
   echo "  --file       Source .docx file"
   echo "  --output     Output directory"
-  echo "  --size       Target width/height in pixels (default: 1024)"
+  echo "  --size       Target dimension in pixels. Single number for square (default: 1024) or WxH for custom size (e.g., 1000x500)"
   echo "  --background Background color (default: white, use 'none' for transparency)"
   echo "  --fit        Resize mode: contain (default) or cover"
   echo "  --keep       Keep original extracted images in a _originals subfolder"
@@ -71,13 +71,20 @@ if [[ ! -f "$FILE" || "${FILE##*.}" != "docx" ]]; then
   exit 1
 fi
 
-if ! [[ "$SIZE" =~ ^[0-9]+$ ]]; then
-  echo -e "${RED}✗ Size must be a positive integer.${RESET}"
+if [[ "$FIT" != "contain" && "$FIT" != "cover" ]]; then
+  echo -e "${RED}✗ Fit must be 'contain' or 'cover'.${RESET}"
   exit 1
 fi
 
-if [[ "$FIT" != "contain" && "$FIT" != "cover" ]]; then
-  echo -e "${RED}✗ Fit must be 'contain' or 'cover'.${RESET}"
+# -------- Parse SIZE for square or WxH --------
+if [[ "$SIZE" =~ ^[0-9]+$ ]]; then
+  WIDTH="$SIZE"
+  HEIGHT="$SIZE"
+elif [[ "$SIZE" =~ ^([0-9]+)x([0-9]+)$ ]]; then
+  WIDTH="${BASH_REMATCH[1]}"
+  HEIGHT="${BASH_REMATCH[2]}"
+else
+  echo -e "${RED}✗ Invalid size format. Use a single number or WxH (e.g., 1000 or 1000x500).${RESET}"
   exit 1
 fi
 
@@ -125,15 +132,15 @@ if [[ "$FIT" == "cover" ]]; then
   resize_flag="^"
 fi
 
-echo -e "→ Converting images to target dimensions ${SIZE} with fit=${FIT}..."
+echo -e "→ Converting images to target dimensions ${WIDTH}x${HEIGHT} with fit=${FIT}..."
 
 # Use find + xargs to handle filenames safely (compatible with macOS bash)
 find "$TMPDIR" -type f -print0 | xargs -0 magick mogrify \
   -path "$OUTDIR" \
-  -resize "${SIZE}x${SIZE}${resize_flag}" \
+  -resize "${WIDTH}x${HEIGHT}${resize_flag}" \
   -background "$BG" \
   -gravity center \
-  -extent "${SIZE}x${SIZE}" &
+  -extent "${WIDTH}x${HEIGHT}" &
 
 pid=$!
 spinner $pid
