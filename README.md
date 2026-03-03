@@ -25,7 +25,6 @@ A lightweight CLI tool to extract and resize images from Microsoft Word (.docx) 
 - ImageMagick (`magick` command)
 
 Install ImageMagick on macOS:
-
 ```bash
 brew install imagemagick
 ```
@@ -35,14 +34,12 @@ brew install imagemagick
 ## Installation
 
 Clone the repository:
-
 ```bash
 git clone git@github.com:dennisego1999/wordimg.git
 cd wordimg
 ```
 
 Run the installer:
-
 ```bash
 ./install.sh
 ```
@@ -54,15 +51,12 @@ The `install.sh` script:
 1. Locates the executable in `bin/`
 2. Detects a suitable install location:
    - `~/.local/bin`
-   - or `/usr/local/bin`
+   - or `/usr/local/bin` (prompts for confirmation, may require your password)
 3. Copies the executable to the selected directory
 4. Ensures it is executable
-5. Checks whether the install directory is in your `PATH`
-6. Prints instructions if you need to update your `PATH`
 
 The installer **does not automatically modify your shell configuration**, following standard Unix CLI conventions.  
 If the install directory is not in your PATH, add the following line to your `~/.zshrc` or `~/.bashrc`:
-
 ```bash
 export PATH="$HOME/.local/bin:$PATH"
 ```
@@ -72,7 +66,6 @@ export PATH="$HOME/.local/bin:$PATH"
 ---
 
 After installation, you can verify:
-
 ```bash
 wordimg --help
 ```
@@ -80,7 +73,6 @@ wordimg --help
 ---
 
 ## Usage
-
 ```bash
 wordimg --file FILE.docx --output OUTPUT_DIR [options]
 ```
@@ -106,7 +98,6 @@ wordimg --file FILE.docx --output OUTPUT_DIR [options]
 Preserves full image content. Pads with background color if necessary.
 
 Equivalent to:
-
 ```css
 object-fit: contain;
 ```
@@ -118,7 +109,6 @@ object-fit: contain;
 Fills the entire target size. Crops overflow if necessary.
 
 Equivalent to:
-
 ```css
 object-fit: cover;
 ```
@@ -128,7 +118,6 @@ object-fit: cover;
 ## Example
 
 Resize images to 1000x1000, preserve transparency, and keep originals:
-
 ```bash
 wordimg \
   --file ./file.docx \
@@ -140,7 +129,6 @@ wordimg \
 ```
 
 Output:
-
 ```
 processed/
 ├── image1.png
