@@ -6,7 +6,7 @@ A lightweight CLI tool to extract and resize images from Microsoft Word (.docx) 
 
 ---
 
-## ✨ Features
+## Features
 
 - Extract all images from `.docx` files
 - Resize to any square or custom dimension
@@ -18,7 +18,7 @@ A lightweight CLI tool to extract and resize images from Microsoft Word (.docx) 
 
 ---
 
-## 📦 Requirements
+## Requirements
 
 - macOS or Linux
 - `unzip`
@@ -32,7 +32,7 @@ brew install imagemagick
 
 ---
 
-## 🚀 Installation
+## Installation
 
 Clone the repository:
 
@@ -41,22 +41,13 @@ git clone git@github.com:dennisego1999/wordimg.git
 cd wordimg
 ```
 
-Make the installer executable:
-
-```bash
-chmod +x install.sh
-```
-
 Run the installer:
 
 ```bash
 ./install.sh
 ```
 
-If installing to a system directory such as:
-
-- /usr/local/bin (Intel macOS)
-- /opt/homebrew/bin (Apple Silicon macOS)
+If installing to a system directory such as `/usr/local/bin`
 
 You may be prompted for your password.
 If required, run:
@@ -71,9 +62,8 @@ The `install.sh` script:
 
 1. Locates the executable in `bin/`
 2. Detects a suitable install location:
-   - `/usr/local/bin`
-   - `/opt/homebrew/bin`
-   - or `~/.local/bin`
+   - `~/.local/bin`
+   - or `/usr/local/bin`
 3. Copies the executable to the selected directory
 4. Ensures it is executable
 5. Checks whether the install directory is in your `PATH`
@@ -98,7 +88,7 @@ wordimg --help
 
 ---
 
-## 🧰 Usage
+## Usage
 
 ```bash
 wordimg --file FILE.docx --output OUTPUT_DIR [options]
@@ -144,7 +134,7 @@ object-fit: cover;
 
 ---
 
-## 🧪 Example
+## Example
 
 Resize images to 1000x1000, preserve transparency, and keep originals:
 
@@ -171,7 +161,7 @@ processed/
 
 ---
 
-## 🛑 Error Handling
+## Error Handling
 
 If extraction or resizing fails:
 
@@ -181,13 +171,13 @@ If extraction or resizing fails:
 
 ---
 
-## 📄 License
+## License
 
 MIT License
 
 ---
 
-## 👤 Author
+## Author
 
 Dennis Ego  
 GitHub: https://github.com/dennisego1999
