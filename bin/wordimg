@@ -127,15 +127,14 @@ fi
 
 echo -e "→ Converting images to target dimensions ${SIZE} with fit=${FIT}..."
 
-# Find all files and process them in batches with a single mogrify call
-mapfile -d '' files < <(find "$TMPDIR" -type f -print0)
-magick mogrify \
+# Use find + xargs to handle filenames safely (compatible with macOS bash)
+find "$TMPDIR" -type f -print0 | xargs -0 magick mogrify \
   -path "$OUTDIR" \
   -resize "${SIZE}x${SIZE}${resize_flag}" \
   -background "$BG" \
   -gravity center \
-  -extent "${SIZE}x${SIZE}" \
-  "${files[@]}" &
+  -extent "${SIZE}x${SIZE}" &
+
 pid=$!
 spinner $pid
 wait $pid
